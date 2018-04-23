@@ -1,23 +1,31 @@
 <% include ../partials/header %>
-  <h1 class="h2">
+  <h1 class="h2 text-center mb-5">
     Create New Task</h1>
-  </div>
-  <div class="card col-xl-6">
+  <div class="card col-xl-6 mx-auto ">
     <div class="card-body">
       <form action="/task" method="POST">
         <div class="form-group">
-          <label for="formGroupExampleInput">Example label</label>
-          <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Name">
+          <label for="formGroupExampleInput">Enter Job Name</label>
+          <input type="text" name="name" class="form-control">
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput">Example label</label>
-          <input type="text" name="desc" class="form-control" id="formGroupExampleInput" placeholder="Description">
+          <label for="desc">Enter Job Description</label>
+          <textarea name="desc" class="form-control" rows="3"></textarea>
         </div>
+        <!-- <div class="form-group">
+          <label for="formGroupExampleInput">Example label</label>
+          <input type="text" name="author" class="form-control"  placeholder="User">
+        </div> -->
         <div class="form-group">
-          <label for="formGroupExampleInput">Example label</label>
-          <input type="text" name="author" class="form-control" id="formGroupExampleInput" placeholder="User">
+          <label for="jobType">Choose Job Type</label>
+          <select name="jobType" class="form-control">
+            <option>Developer</option>
+            <option>Design</option>
+            <option>Copywriters</option>
+            <option>Media Buyer</option>
+          </select>
         </div>
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" class="btn btn-raised btn-primary w-100 text-center">
       </form>
     </div>
 

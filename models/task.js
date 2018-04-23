@@ -10,8 +10,19 @@ const taskSchema = new mongoose.Schema({
     require: true
   },
   author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
+  jobType: {
     type: String,
-    require: true
+    required: true
+  },
+  status: {
+    type: String,
+    default: "empty"
   }
 });
 

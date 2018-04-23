@@ -13,126 +13,69 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
     integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
 
-  <title>Dashboard</title>
-  <style>
-    .container-fluid {
-      margin-top: 60px;
-    }
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/stylesheets/styles.css">
 
-    .navbar {
-      background: #3a385b;
-    }
-  </style>
+  <title>Dashboard</title>
+
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg  fixed-top">
-    <a class="navbar-brand" href="/">Logo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+  <nav class="navbar fixed-top  justify-content-end">
+    <div class="bmd-form-group bmd-collapse-inline mr-auto">
+      <button class="btn bmd-btn-icon" for="search" data-toggle="collapse" data-target="#collapse-search" aria-expanded="false"
+        aria-controls="collapse-search">
+        <i class="material-icons">search</i>
+      </button>
+      <span id="collapse-search" class="collapse">
+        <input class="form-control" type="text" id="search" placeholder="Enter your query...">
+      </span>
     </div>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" href="/logout">Log Out</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-capitalize" href="#">Username</a>
+      </li>
+    </ul>
+
   </nav>
 
-  <main>
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-xl-2 d-none d-xl-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/new">
-                  <span data-feather="file"></span>
-                  Add New Task
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Products
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
-            </ul>
-
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
-                </a>
-              </li>
-            </ul>
+  <div class="container-fluid mt-5 pt-5">
+    <div class="row">
+      <div class="col sidebar">
+        <a href="/">
+          <div class="logo">
+            <img src="" alt="Logo">
           </div>
-        </nav>
+        </a>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/task/new">Add New Task</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
 
-        <main role="main" class="col-md-12 col-lg-12 col-xl-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      </div>
+      <div class="col main">
+        <div class="container-fluid">
+          <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+              <%= error %>
+            </div>
+            <% } %>
+              <% if(success && success.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                  <%= success %>
+                </div>
+                <% } %>
+        </div>

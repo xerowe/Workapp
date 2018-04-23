@@ -2,17 +2,23 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 const Task = require("../models/task");
+const middleware = require("../middleware");
 
 //CREATE - add new Task to DB
-router.post("/", (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
   // get data from form and add to task array
   let name = req.body.name;
   let desc = req.body.desc;
-  let author = req.body.author;
+  let author = {
+    id: req.user._id,
+    username: req.user.username
+  };
+  let jobType = req.body.jobType;
   let newTask = {
     name: name,
     desc: desc,
-    author: author
+    author: author,
+    jobType: jobType
   };
   // Create a new task and save to DB
   Task.create(newTask, (err, newlyCreated) => {
@@ -27,7 +33,7 @@ router.post("/", (req, res) => {
 });
 
 // SHOW TASK ROUTE
-router.get("/:id", (req, res) => {
+router.get("/:id", middleware.isLoggedIn, (req, res) => {
   Task.findById(req.params.id, (err, foundTask) => {
     if (err) {
       res.redirect("/new");
@@ -38,7 +44,7 @@ router.get("/:id", (req, res) => {
 });
 
 // EDIT TASK ROUTE
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", middleware.isLoggedIn, (req, res) => {
   Task.findById(req.params.id, (err, foundTask) => {
     if (err) {
       console.log(err);
@@ -49,7 +55,7 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // UPDATE TASK ROUTE
-router.put("/:id", (req, res) => {
+router.put("/:id", middleware.isLoggedIn, (req, res) => {
   // find and update the correct campground
   Task.findByIdAndUpdate(
     req.params.id,
@@ -66,7 +72,7 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE TASK ROUTE
-router.delete("/:id", function(req, res) {
+router.delete("/:id", middleware.checkTaskOwnership, function(req, res) {
   Task.findByIdAndRemove(req.params.id, function(err) {
     if (err) {
       res.send("no");
