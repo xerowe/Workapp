@@ -8,10 +8,14 @@ const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const User = require("./models/user");
 const Task = require("./models/task");
+const Track = require("./models/track");
+const Product = require("./models/product");
 
 //requiring routes
 const indexRoutes = require("./routes/index");
 const taskRoutes = require("./routes/task");
+const trackRoutes = require("./routes/track");
+const productRoutes = require("./routes/product");
 
 // Connect to the DB
 mongoose.connect("mongodb://miro:miro@ds247479.mlab.com:47479/work-app");
@@ -21,6 +25,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = require("moment");
 // Passport Congiguration
 app.use(
   require("express-session")({
@@ -44,13 +49,15 @@ app.use(function(req, res, next) {
 
 app.use("/", indexRoutes);
 app.use("/task", taskRoutes);
+app.use("/track", trackRoutes);
+app.use("/product", productRoutes);
 
 //The 404 Route
 app.get("*", function(req, res) {
   res.status(404).send("Page Not Found");
 });
 
-const port = 5000;
+const port = 5001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

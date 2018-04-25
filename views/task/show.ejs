@@ -2,7 +2,7 @@
   <div class="card  text-center">
     <div class="card-header">
       Creaed By:
-      <%= task.author %>
+      <%= task.author.username %>
     </div>
     <div class="card-body">
       <h5 class="card-title">
@@ -15,6 +15,10 @@
       <a href="/task/<%= task.id %>/edit" class="btn btn-warning">Edit</a>
       <form class="d-inline" action="/task/<%= task._id %>?_method=DELETE" method="POST">
         <button class="btn btn-danger">Delete</button>
+
+        <% if(currentUser && task.author.id.equals(currentUser._id) ){ %>
+
+          <% } %>
       </form>
     </div>
     <div class="card-footer text-muted">

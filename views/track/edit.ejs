@@ -1,0 +1,69 @@
+<% include ../partials/header %>
+  <h1 class="h2 text-center mb-5">
+    Create New Task</h1>
+  <div class="card col-xl-6 mx-auto ">
+    <div class="card-body">
+      <form action="/track/<%= track._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="product">Select product: </label>
+          <select class="form-control" name="track[product]">
+            <option selected="selected">
+              <%= track.product %>
+            </option>
+            <% products.reverse().forEach(function(product){ %>
+              <option value="<%= product.name %>">
+                <%= product.name %>
+              </option>
+              <% }); %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="country">Select country:</label>
+          <select class="form-control" name="track[country]">
+            <option selected="selected">
+              <%= track.country %>
+            </option>
+            <option>AE</option>
+            <option>FR</option>
+            <option>DE</option>
+          </select>
+        </div>
+        <div class="form-group proof-qa">
+          <div class="row">
+            <div class="col-xl-6">
+              <label for="proof">Passed proff </label>
+              <input name="name[proof]" class="datePicker" type="date" disabled value="<%= track.proof.toDateString() %>">
+              <input class="passed" type="checkbox">
+            </div>
+            <div class="col-xl-6">
+              <label for="qa">Passed QA </label>
+              <input name="name[qa]" class="datePicker" type="date" disabled value="<%= track.qa.toDateString() %>">
+              <input class="passed" type="checkbox">
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-raised btn-primary w-100 text-center">
+      </form>
+    </div>
+
+  </div>
+  <script>
+    Date.prototype.toDateInputValue = (function () {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0, 10);
+    });
+
+    let datePicker = document.querySelectorAll('.datePicker'),
+      y;
+    let passed = document.querySelectorAll('.passed'),
+      i;
+    for (i = 0; i < passed.length; i++) {
+      passed[i].addEventListener('click', function () {
+        this.previousElementSibling.value = new Date().toDateString();
+
+        console.log(this.checked);
+      });
+    }
+  </script>
+  <% include ../partials/footer %>

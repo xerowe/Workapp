@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+  <div class="card  text-center">
+    <div class="card-header">
+      Creaed By:
+      <%= product.author.username %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= product.name %>
+      </h5>
+      <p class="card-text">
+        <a href="<%= product.campLink %>" target="_blank">Link to campaign file </a>
+      </p>
+    </div>
+
+    <% include ../partials/footer %>

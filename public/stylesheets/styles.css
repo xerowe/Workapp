@@ -1,25 +1,51 @@
 /* Global */
 body {
-  background: #f5f7fa;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #797979;
+  background: #f7f7f7;
 }
-
+.form-control:focus {
+  box-shadow: none;
+}
+.alert {
+  margin-bottom: 0 !important ;
+  padding-right: 2rem;
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+.alert-dismissible .close {
+  padding: 0.45rem 0.5rem;
+}
+.alert-danger {
+  background-color: #e83f56;
+  border-color: #e83f56;
+  color: #fff;
+}
+.badge-danger {
+  background: #e83f56;
+}
 /* Card  */
 .card {
-  box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07),
-    0 2px 9px 0 rgba(62, 57, 107, 0.06);
+  /* box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07),
+    0 2px 9px 0 rgba(62, 57, 107, 0.06); */
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  border: none;
 }
 /* Top navigation */
 .navbar {
-  background: #fff;
-  box-shadow: 2px 4px 20px -4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  /* box-shadow: 2px 4px 20px -4px rgba(0, 0, 0, 0.1); */
 }
-.bmd-form-group.bmd-collapse-inline {
+.navbar .form-inline {
   margin-left: 260px;
 }
 
 /* Side navigation */
 .sidebar {
-  background: #404e67;
+  background: #34495e;
   max-width: 240px;
   position: fixed;
   left: 0;
@@ -38,13 +64,40 @@ body {
 }
 
 /* Main area */
+/* Greating msg */
+.greeting-msg img {
+  max-width: 68px;
+}
+
+.sub-nav {
+  margin-top: 58px;
+  padding: 25px 0 25px 290px;
+  background: #fff;
+  color: #333;
+  font-weight: black;
+}
 .main {
   margin-left: 260px;
 }
-
+/* First 4 tabs */
+.main .team div:first-of-type {
+  background: #78c2bf;
+}
+.main .team div:last-of-type {
+  background: #66bab7;
+}
+.main .quick-view .card-title {
+  color: #8b4f95;
+}
+.main .quick-view .list-group:last-of-type {
+  margin-bottom: 1rem;
+}
 /* Table  */
-table form {
-  margin-bottom: 0;
+.table thead th,
+.table td,
+.table th,
+.table tbody + tbody {
+  border: none;
 }
 table td {
   overflow: hidden;
@@ -53,10 +106,6 @@ table td {
   max-width: 150px;
 }
 .table-hover tbody tr:hover {
-  background-color: rgba(245, 247, 250, 0.5);
-}
-.table td,
-.table th {
-  border-top: none;
+  background-color: rgba(0, 0, 0, 0.01);
 }
 /* Form */

@@ -7,11 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Material Design for Bootstrap fonts and icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic|Material+Icons">
 
-  <!-- Material Design for Bootstrap CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
-    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/stylesheets/styles.css">
@@ -21,28 +21,48 @@
 </head>
 
 <body>
-  <nav class="navbar fixed-top  justify-content-end">
-    <div class="bmd-form-group bmd-collapse-inline mr-auto">
-      <button class="btn bmd-btn-icon" for="search" data-toggle="collapse" data-target="#collapse-search" aria-expanded="false"
-        aria-controls="collapse-search">
-        <i class="material-icons">search</i>
-      </button>
-      <span id="collapse-search" class="collapse">
-        <input class="form-control" type="text" id="search" placeholder="Enter your query...">
-      </span>
-    </div>
+  <nav class="navbar fixed-top bg-white  justify-content-end">
+    <form class="form-inline mr-auto">
+      <input class="form-control mr-sm-2 pr-5 border-0 bg-light" type="search" placeholder="Search..." aria-label="Search">
+      <i class="material-icons text-muted">search</i>
+    </form>
     <ul class="nav">
       <li class="nav-item">
         <a class="nav-link text-capitalize" href="/logout">Log Out</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-capitalize" href="#">Username</a>
+        <a class="nav-link text-capitalize" href="/user/<%= currentUser._id %>/profile">
+          <%= currentUser.username %>
+        </a>
       </li>
     </ul>
 
   </nav>
+  <div class="container-fluid">
+    <div class="row sub-nav d-flex align-items-center">
+      <div class="greeting-msg d-flex align-items-center ">
+        <h3>Dashboard</h3>
+        <a href="/" class="btn btn-link text-muted">Home</a>
+      </div>
+      <div class="flash-msg ml-auto mr-5">
+        <% if(error && error.length > 0){ %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <% } %>
+            <% if(success && success.length > 0){ %>
+              <div class="alert alert-success" role="alert">
+                <%= success %>
+              </div>
+              <% } %>
+      </div>
+    </div>
 
-  <div class="container-fluid mt-5 pt-5">
+  </div>
+  <div class="container-fluid mt-4">
     <div class="row">
       <div class="col sidebar">
         <a href="/">
@@ -58,7 +78,7 @@
             <a class="nav-link" href="/task/new">Add New Task</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="/track/new">Track Product progress</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
@@ -67,15 +87,3 @@
 
       </div>
       <div class="col main">
-        <div class="container-fluid">
-          <% if(error && error.length > 0){ %>
-            <div class="alert alert-danger" role="alert">
-              <%= error %>
-            </div>
-            <% } %>
-              <% if(success && success.length > 0){ %>
-                <div class="alert alert-success" role="alert">
-                  <%= success %>
-                </div>
-                <% } %>
-        </div>

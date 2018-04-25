@@ -1,190 +1,201 @@
 <% include partials/header %>
 
-  <div class="row">
-    <div class="col-xl-9 col-lg-12">
+  <!-- Dispaly 4 card side by side -->
+  <div class="row quick-view">
+
+    <!-- Card -->
+    <div class="col-xl-3 col-lg-6">
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">
-            Recent Task
-          </h3>
-        </div>
-        <div class="card-content">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0 ps-container">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Job For</th>
-                  <th>Author</th>
-                  <th>Status</th>
-                  <th>Actio</th>
-                </tr>
-              </thead>
-              <% tasks.slice(-5).forEach(function(task){ %>
-                <tbody>
-                  <tr class="">
-                    <td class="py-3">
-                      <%= task.name %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.desc %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.jobType %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.author.username %>
-                    </td>
-                    <td class="py-3 status">
-                      <% if (task.status == 'empty') { %>
-                        <span class="badge badge-pill badge-danger">Not Taken</span>
-                        <% } else if (task.status == 'taken') { %>
-                          <span class="badge badge-pill badge-info">Taken</span>
-                          <% } else if (task.status == 'finished') { %>
-                            <span class="badge badge-pill badge-success">Finished</span>
-                            <% } %>
-                    </td>
-                    <td class="d-flex py-3">
-                      <a href="/task/<%= task._id %>">
-                        <i class="material-icons">more_horiz</i>
-                      </a>
-                      <i class="material-icons">done</i>
-                      <form class="d-inline" action="/task/<%= task._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger p-0">
-                          <i class="material-icons">close</i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                </tbody>
-                <% }); %>
-            </table>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title">Recent Products</h5>
+          <% products.slice(-4).reverse().forEach(function(product){ %>
+            <div class="list-group">
+              <a href="/product/<%= product._id %>" class="list-group-item-action">
+                <%= product.name %>
+              </a>
+            </div>
+            <% }); %>
+              <a href="#" class="card-link">View all</a>
+              <a href="/product/new" class="card-link">Add new</a>
         </div>
       </div>
     </div>
-    <div class="col-xl-3">
+
+    <!-- Card -->
+    <div class="col-xl-3 col-lg-6">
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">
-            New Product
-          </h3>
-        </div>
         <div class="card-body">
-          <table class="table">
-            <caption>List of products</caption>
-            <!-- <thead>
+          <h5 class="card-title">Recent Products</h5>
+          <% products.slice(-4).reverse().forEach(function(product){ %>
+            <div class="list-group">
+              <a href="/product/<%= product._id %>" class="list-group-item-action">
+                <%= product.name %>
+              </a>
+            </div>
+            <% }); %>
+              <a href="#" class="card-link">View all</a>
+              <a href="/product/new" class="card-link">Add new</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-xl-3 col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Recent Products</h5>
+          <% products.slice(-4).reverse().forEach(function(product){ %>
+            <div class="list-group">
+              <a href="/product/<%= product._id %>" class="list-group-item-action">
+                <%= product.name %>
+              </a>
+            </div>
+            <% }); %>
+              <a href="#" class="card-link">View all</a>
+              <a href="/product/new" class="card-link">Add new</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="col-xl-3 col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Recent Products</h5>
+          <% products.slice(-4).reverse().forEach(function(product){ %>
+            <div class="list-group">
+              <a href="/product/<%= product._id %>" class="list-group-item-action">
+                <%= product.name %>
+              </a>
+            </div>
+            <% }); %>
+              <a href="#" class="card-link">View all</a>
+              <a href="/product/new" class="card-link">Add new</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-header bg-transparent border-light">Recent Task</div>
+        <div class="card-body">
+          <table class='table borderless table-hover'>
+            <thead>
               <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Job For:</th>
+                <th scope="col">Posted By:</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+
               </tr>
-            </thead> -->
+            </thead>
             <tbody>
               <tr>
-                <td>Onycoslve</td>
-                <td>
-                  <a href="#" class="btn btn-info pt-0 font-weight-normal">View More</button>
-                </td>
+                <% tasks.slice(-5).reverse().forEach(function(task){ %>
+                  <td>
+                    <%= task.name %>
+                  </td>
+                  <td>
+                    <%= task.desc %>
+                  </td>
+                  <td>
+                    <%= task.jobType %>
+                  </td>
+                  <td>
+                    <%= task.author.username %>
+                  </td>
+                  <td class="py-3 status">
+                    <% if (task.status == 'empty') { %>
+                      <span class="badge badge-pill badge-danger">Not Taken</span>
+                      <% } else if (task.status == 'taken') { %>
+                        <span class="badge badge-pill badge-info">Taken</span>
+                        <% } else if (task.status == 'finished') { %>
+                          <span class="badge badge-pill badge-success">Finished</span>
+                          <% } %>
+                  </td>
+                  <td class="d-flex py-3">
+                    <a href="/task/<%= task._id %>" class="btn-link text-muted">
+                      <i class="material-icons">visibility</i>
+                    </a>
+                    <form class="d-inline" action="/task/<%= task._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-link text-muted p-0">
+                        <i class="material-icons">delete</i>
+                      </button>
+                    </form>
+                  </td>
               </tr>
-              <tr>
-                <td>Onycoslve</td>
-                <td>
-                  <a href="#" class="btn btn-info pt-0 font-weight-normal">View More</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Onycoslve</td>
-                <td>
-                  <a href="#" class="btn btn-info pt-0 font-weight-normal">View More</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Onycoslve</td>
-                <td>
-                  <a href="#" class="btn btn-info pt-0 font-weight-normal">View More</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Onycoslve</td>
-                <td>
-                  <a href="#" class="btn btn-info pt-0 font-weight-normal">View More</button>
-                </td>
-              </tr>
+              <% }); %>
             </tbody>
+
           </table>
         </div>
       </div>
     </div>
   </div>
+
   <div class="row mt-4">
-    <div class="col-xl-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">
-            Recent Task
-          </h3>
-        </div>
-        <div class="card-content">
-          <div class="table-responsive">
-            <table class="table table-hover mb-0 ps-container">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Job For</th>
-                  <th>Author</th>
-                  <th>Status</th>
-                  <th>Actio</th>
-                </tr>
-              </thead>
-              <% tasks.slice(-5).forEach(function(task){ %>
-                <tbody>
-                  <tr class="">
-                    <td class="py-3">
-                      <%= task.name %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.desc %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.jobType %>
-                    </td>
-                    <td class="py-3">
-                      <%= task.author %>
-                    </td>
-                    <td class="py-3 status">
-                      <% if (task.status == 'empty') { %>
-                        <span class="badge badge-pill badge-danger">Not Taken</span>
-                        <% } else if (task.status == 'taken') { %>
-                          <span class="badge badge-pill badge-info">Taken</span>
-                          <% } else if (task.status == 'finished') { %>
-                            <span class="badge badge-pill badge-success">Finished</span>
-                            <% } %>
-                    </td>
-                    <td class="d-flex py-3">
-                      <a href="/task/<%= task._id %>">
-                        <i class="material-icons">more_horiz</i>
-                      </a>
-                      <i class="material-icons">done</i>
-                      <form class="d-inline" action="/task/<%= task._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger p-0">
-                          <i class="material-icons">close</i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                </tbody>
-                <% }); %>
-            </table>
-          </div>
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-header bg-transparent border-light">Recent Task</div>
+        <div class="card-body">
+          <table class='table borderless table-hover'>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Country</th>
+                <th scope="col">Proofreading</th>
+                <th scope="col">QA:</th>
+                <th scope="col">Author</th>
+                <th scope="col">Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <% tracks.slice(-5).reverse().forEach(function(track){ %>
+                  <td>
+                    <%= track.product %>
+                  </td>
+                  <td>
+                    <%= track.country %>
+                  </td>
+                  <td>
+                    <%= track.proof.toDateString() %>
+                  </td>
+                  <td>
+                    <%= track.qa.toDateString() %>
+                  </td>
+                  <td>
+                    <a href="user/<%= track.author.id %>/profile">
+                      <%= track.author.username %>
+                    </a>
+                  </td>
+                  <td class="d-flex py-3">
+                    <a href="/track/<%= track._id %>" class="btn-link text-muted">
+                      <i class="material-icons">visibility</i>
+                    </a>
+                    <form class="d-inline" action="/track/<%= track._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-link text-muted p-0">
+                        <i class="material-icons">delete</i>
+                      </button>
+                    </form>
+                  </td>
+              </tr>
+              <% }); %>
+            </tbody>
+
+          </table>
         </div>
       </div>
     </div>
   </div>
-
-
   <script>
     let status = document.querySelector('.status');
   </script>
+
+
   <% include partials/footer %>
