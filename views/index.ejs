@@ -110,11 +110,13 @@
                   </td>
                   <td class="py-3 status">
                     <% if (task.status == 'empty') { %>
-                      <span class="badge badge-pill badge-danger">Not Taken</span>
+                      <h5>
+                        <span class="badge badge-pill badge-danger font-weight-normal">Not Started</span>
+                      </h5>
                       <% } else if (task.status == 'taken') { %>
-                        <span class="badge badge-pill badge-info">Taken</span>
+                        <span class="badge badge-pill badge-info">In Progress</span>
                         <% } else if (task.status == 'finished') { %>
-                          <span class="badge badge-pill badge-success">Finished</span>
+                          <span class="badge badge-pill badge-success">Complete</span>
                           <% } %>
                   </td>
                   <td class="d-flex py-3">
@@ -139,58 +141,92 @@
 
   <div class="row mt-4">
     <div class="col-lg-12">
-      <div class="card mb-3">
-        <div class="card-header bg-transparent border-light">Recent Task</div>
-        <div class="card-body">
-          <table class='table borderless table-hover'>
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Country</th>
-                <th scope="col">Proofreading</th>
-                <th scope="col">QA:</th>
-                <th scope="col">Author</th>
-                <th scope="col">Action</th>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <% tracks.slice(-5).reverse().forEach(function(track){ %>
-                  <td>
-                    <%= track.product %>
-                  </td>
-                  <td>
-                    <%= track.country %>
-                  </td>
-                  <td>
-                    <%= track.proof.toDateString() %>
-                  </td>
-                  <td>
-                    <%= track.qa.toDateString() %>
-                  </td>
-                  <td>
-                    <a href="user/<%= track.author.id %>/profile">
-                      <%= track.author.username %>
-                    </a>
-                  </td>
-                  <td class="d-flex py-3">
-                    <a href="/track/<%= track._id %>" class="btn-link text-muted">
-                      <i class="material-icons">visibility</i>
-                    </a>
-                    <form class="d-inline" action="/track/<%= track._id %>?_method=DELETE" method="POST">
-                      <button class="btn btn-link text-muted p-0">
-                        <i class="material-icons">delete</i>
-                      </button>
-                    </form>
-                  </td>
-              </tr>
-              <% }); %>
-            </tbody>
 
-          </table>
-        </div>
-      </div>
+      <table class='table borderless table-hover text-center'>
+        <thead class="bg-white text-dark">
+          <tr>
+            <th scope="col" class="text-left text-info h4">Product</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Country</th>
+            <th scope="col">Proofreading</th>
+            <th scope="col">QA Testing</th>
+            <th scope="col">Launch</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody class="bg-light">
+          <tr>
+            <% tracks.slice(-5).reverse().forEach(function(track){ %>
+              <td class="text-left font-weight-bold" style="color:#767d93;">
+                <%= track.product %>
+              </td>
+              <td class="d-flex justify-content-center align-items-center col">
+                <a href="user/<%= track.author.id %>/profile">
+                  <img class="rounded-circle" src="<%= track.author.avatar %>" alt="avatar" style="width: 32px;">
+                </a>
+                <p class="ml-2 mb-0 text-capitalize text-left">
+                  <%= track.author.username %>
+                    </br>
+                    <span class="text-lowercase text-muted">
+                      miroslav.ivanov@lidango.com
+                    </span>
+                </p>
+              </td>
+              <td>
+                <%= track.country %>
+              </td>
+              <% if (track.isFinishedProof == "of") { %>
+                <td class="bg-warning text-white">
+                  <%= track.proof.toDateString()  %>
+                </td>
+                <% } else { %>
+                  <td class="bg-success text-white">
+                    Done
+                    <%  } %>
+                  </td>
+                  <% if (track.isFinishedQa == "of") { %>
+                    <td class="bg-warning text-white">
+                      <%= track.qa.toDateString()  %>
+                    </td>
+                    <% } else { %>
+                      <td class="bg-success text-white">
+                        Done
+                        <%  } %>
+                      </td>
+                      <% if (track.isFinishedQa == "on" && track.isFinishedProof == "on" ) { %>
+                        <td class="bg-success text-white">
+                          Done
+                        </td>
+                        <% } else { %>
+                          <td class="bg-danger text-white">
+                            Stuck
+                            <%  } %>
+                          </td>
+
+                          <td class="d-flex justify-content-center col">
+                            <div class="">
+                              <a href="/track/<%= track._id %>" class="btn-link text-muted">
+                                <i class="material-icons">visibility</i>
+                              </a>
+                            </div>
+                            <div class="">
+                              <form class="d-inline" action="/track/<%= track._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-link text-muted p-0">
+                                  <i class="material-icons">delete</i>
+                                </button>
+                              </form>
+                            </div>
+
+                          </td>
+          </tr>
+          <% }); %>
+        </tbody>
+
+      </table>
+
+
     </div>
   </div>
   <script>

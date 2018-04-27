@@ -16,7 +16,16 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/stylesheets/styles.css">
 
+  <link rel="shortcut icon" type="image/png" href="../img/fav.png" />
   <title>Dashboard</title>
+
+  <script>
+    Date.prototype.toDateInputValue = (function () {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0, 10);
+    });
+  </script>
 
 </head>
 
@@ -26,6 +35,21 @@
       <input class="form-control mr-sm-2 pr-5 border-0 bg-light" type="search" placeholder="Search..." aria-label="Search">
       <i class="material-icons text-muted">search</i>
     </form>
+    <div class="flash-msg  mr-auto">
+      <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <% } %>
+          <% if(success && success.length > 0){ %>
+            <div class="alert alert-success" role="alert">
+              <%= success %>
+            </div>
+            <% } %>
+    </div>
     <ul class="nav">
       <li class="nav-item">
         <a class="nav-link text-capitalize" href="/logout">Log Out</a>
@@ -39,7 +63,7 @@
 
   </nav>
   <div class="container-fluid">
-    <div class="row sub-nav d-flex align-items-center">
+    <!-- <div class="row sub-nav d-flex align-items-center">
       <div class="greeting-msg d-flex align-items-center ">
         <h3>Dashboard</h3>
         <a href="/" class="btn btn-link text-muted">Home</a>
@@ -59,31 +83,32 @@
               </div>
               <% } %>
       </div>
-    </div>
+    </div> -->
 
   </div>
   <div class="container-fluid mt-4">
     <div class="row">
       <div class="col sidebar">
-        <a href="/">
-          <div class="logo">
-            <img src="" alt="Logo">
+        <div class="glass">
+          <div class="glass-inner">
+            <a href="/" class="logo">
+              <img src="../img/logo.png" alt="Logo">
+            </a>
+            <ul class="nav flex-column mt-3">
+              <li class="nav-item">
+                <a class="nav-link py-3 active" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link py-3" href="/task/new">Add New Task</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link py-3" href="/track/new">Track Product progress</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link py-3" href="#">Disabled</a>
+              </li>
+            </ul>
           </div>
-        </a>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/task/new">Add New Task</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/track/new">Track Product progress</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-
+        </div>
       </div>
       <div class="col main">

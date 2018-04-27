@@ -12,15 +12,21 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   let country = req.body.country;
   let proof = req.body.proof;
   let qa = req.body.qa;
+  let isFinishedProof = req.body.isFinishedProof;
+  let isFinishedQa = req.body.isFinishedQa;
   let author = {
     id: req.user._id,
-    username: req.user.username
+    username: req.user.username,
+    avatar: req.user.avatar,
+    email: req.user.email
   };
   let newTrack = {
     product: product,
     country: country,
     proof: proof,
     qa: qa,
+    isFinishedProof: isFinishedProof,
+    isFinishedQa: isFinishedQa,
     author: author
   };
 

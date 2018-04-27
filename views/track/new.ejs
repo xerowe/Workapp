@@ -16,21 +16,26 @@
         </div>
         <div class="form-group">
           <label for="country">Select country:</label>
-          <select class="form-control" name="country">
+          <!-- <select class="form-control" name="country">
             <option>AE</option>
             <option>FR</option>
             <option>DE</option>
-          </select>
+          </select> -->
+          <input type="text" name="country" class="form-control">
         </div>
         <div class="form-group">
           <div class="row">
             <div class="col-xl-6">
               <label for="proof">Send for proff </label>
-              <input class="datePicker" type="date" name="proof">
+              <input class="datePicker form-control" type="date" name="proof">
+              <label for="done">Proofreading completed</label>
+              <input class="passed" type="checkbox" value="of" name="isFinishedProof">
             </div>
             <div class="col-xl-6">
               <label for="proof">Send for QA </label>
-              <input class="datePicker" type="date" name="qa">
+              <input class="datePicker form-control" type="date" name="qa">
+              <label for="done">QA test completed</label>
+              <input class="passed" type="checkbox" value="of" name="isFinishedQa">
             </div>
           </div>
         </div>
@@ -40,18 +45,31 @@
 
   </div>
   <script>
-    $('#datepicker').datepicker({
-      uiLibrary: 'bootstrap4'
-    });
-    Date.prototype.toDateInputValue = (function () {
-      var local = new Date(this);
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-      return local.toJSON().slice(0, 10);
-    });
     let datePicker = document.querySelectorAll('.datePicker'),
       i;
+    let passed = document.querySelectorAll('.passed'),
+      y;
+
+    // Always display today date in the datepicker
     for (i = 0; i < datePicker.length; i++) {
       datePicker[i].value = new Date().toDateInputValue();
+    }
+
+
+    for (y = 0; y < passed.length; y++) {
+      passed[y].addEventListener('click', function () {
+        if (this.checked == true) {
+          this.value = 'on';
+          this.previousElementSibling.previousElementSibling.disabled = true;
+          this.previousElementSibling.previousElementSibling.value = '';
+          console.log(this.value);
+        } else {
+          this.value = 'of';
+          this.previousElementSibling.previousElementSibling.disabled = false;
+          this.previousElementSibling.previousElementSibling.value = new Date().toDateInputValue();
+          console.log(this.value);
+        }
+      });
     }
   </script>
   <% include ../partials/footer %>

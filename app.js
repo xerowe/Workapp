@@ -6,12 +6,14 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
+const passportSetup = require("./config/passport-setup");
 const User = require("./models/user");
 const Task = require("./models/task");
 const Track = require("./models/track");
 const Product = require("./models/product");
 
 //requiring routes
+const authRoutes = require("./routes/auth");
 const indexRoutes = require("./routes/index");
 const taskRoutes = require("./routes/task");
 const trackRoutes = require("./routes/track");
@@ -47,6 +49,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use("/", authRoutes);
 app.use("/", indexRoutes);
 app.use("/task", taskRoutes);
 app.use("/track", trackRoutes);
@@ -57,7 +60,7 @@ app.get("*", function(req, res) {
   res.status(404).send("Page Not Found");
 });
 
-const port = 5001;
+const port = 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

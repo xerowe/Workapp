@@ -33,12 +33,12 @@
             <div class="col-xl-6">
               <label for="proof">Passed proff </label>
               <input name="name[proof]" class="datePicker" type="date" disabled value="<%= track.proof.toDateString() %>">
-              <input class="passed" type="checkbox">
+              <input class="passed" type="checkbox" name="passed">
             </div>
             <div class="col-xl-6">
               <label for="qa">Passed QA </label>
               <input name="name[qa]" class="datePicker" type="date" disabled value="<%= track.qa.toDateString() %>">
-              <input class="passed" type="checkbox">
+
             </div>
           </div>
         </div>
@@ -48,12 +48,6 @@
 
   </div>
   <script>
-    Date.prototype.toDateInputValue = (function () {
-      var local = new Date(this);
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-      return local.toJSON().slice(0, 10);
-    });
-
     let datePicker = document.querySelectorAll('.datePicker'),
       y;
     let passed = document.querySelectorAll('.passed'),
